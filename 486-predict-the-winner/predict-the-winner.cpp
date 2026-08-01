@@ -2,12 +2,12 @@ class Solution {
 public:
 vector <vector<int>> v;
 
-    int cpa(vector<int>& arr,int l,int r){
-        if(l==r)return arr[l];
+    int cpa(vector<int>&nums,int l,int r){
+        if(l==r)return nums[l];
         else if (v[l][r]!=-1)return v[l][r];
         else{
-        int left=arr[l]-cpa(arr,l+1,r);
-        int right=arr[r]-cpa(arr,l,r-1);
+        int left=nums[l]-cpa(nums,l+1,r);
+        int right=nums[r]-cpa(nums,l,r-1);
         v[l][r]=max(left,right);
         return v[l][r];
         }
