@@ -1,30 +1,23 @@
 class Solution {
 public:
-  vector<vector<int>> dp;
-     int fn(vector<int>& nums,int i , int j){
-      
-        if (i ==j){
-            return nums[i];
+vector <vector<int>> v;
+
+    int cpa(vector<int>& arr,int l,int r){
+        if(l==r)return arr[l];
+        else if (v[l][r]!=-1)return v[l][r];
+        else{
+        int left=arr[l]-cpa(arr,l+1,r);
+        int right=arr[r]-cpa(arr,l,r-1);
+        v[l][r]=max(left,right);
+        return v[l][r];
         }
-        else if (dp[i][j]!=-1)return dp[i][j];
-        else {
-            int left = nums[i]-fn(nums,i+1,j);
-            int right = nums[j]-fn(nums,i,j-1);
-            dp[i][j] = max(left,right);
 
-                return dp[i][j];
-        }
-     }
-
-
-
-    
+    }
     bool predictTheWinner(vector<int>& nums) {
-int n=nums.size();
-dp.resize(n, vector<int>(n, -1));
-int ans = fn(nums, 0, n - 1);
-
-return ans >= 0;
-     
+        v.resize(nums.size(), vector<int>(nums.size(), -1));
+        int p1=cpa(nums,0,nums.size()-1);
+        if(p1>=0)return true;
+        return false;
+        
     }
 };
