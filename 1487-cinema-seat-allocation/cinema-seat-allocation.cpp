@@ -1,7 +1,9 @@
 class Solution {
 public:
     int maxNumberOfFamilies(int n, vector<vector<int>>& reservedSeats) {
+        
         int ans =2*n;
+        if(reservedSeats.size()==0&&reservedSeats[0].size()==0)return ans;
       sort(reservedSeats.begin(),reservedSeats.end());
      for (int i = 0; i < reservedSeats.size(); ) {
 int sum=2;
